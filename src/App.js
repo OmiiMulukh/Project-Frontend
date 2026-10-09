@@ -386,7 +386,7 @@ function ServicePage({ service }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
-  
+  const [faqItems] = useState(faqs);
   const [faqQueryOpen, setFaqQueryOpen] = useState(false);
   const [faqQuestion, setFaqQuestion] = useState("");
   const [faqName, setFaqName] = useState("");
