@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+const API_BASE_URL = "https://brandnest-backend.onrender.com";
 
 const projects = [
   {
@@ -215,133 +216,6 @@ const services = [
   },
 ];
 
-const serviceDetails = {
-  "01": {
-    title: "Web Development",
-    eyebrow: "WEB DEVELOPMENT",
-    description:
-      "We create responsive, functional and professional websites designed around your business goals, audience and digital requirements.",
-    includes: [
-      "Responsive business websites",
-      "React-based frontend development",
-      "Interactive forms and components",
-      "Performance-focused development",
-    ],
-    process: [
-      "Requirement analysis",
-      "Website structure and design",
-      "Frontend development",
-      "Testing and launch",
-    ],
-    idealFor:
-      "Businesses, startups, personal brands and organizations that need a professional online presence.",
-  },
-
-  "02": {
-    title: "UI / UX Design",
-    eyebrow: "UI / UX DESIGN",
-    description:
-      "We design clean, intuitive and responsive interfaces that make digital products easier to understand and use.",
-    includes: [
-      "Wireframes and page structure",
-      "Responsive interface design",
-      "Visual hierarchy and typography",
-      "User-friendly navigation",
-    ],
-    process: [
-      "Understanding the users",
-      "Planning page structure",
-      "Designing the interface",
-      "Review and refinement",
-    ],
-    idealFor:
-      "Businesses and digital products that want a clearer, more modern and user-friendly interface.",
-  },
-
-  "03": {
-    title: "SEO Optimization",
-    eyebrow: "SEO OPTIMIZATION",
-    description:
-      "We build SEO foundations that help search engines understand your website and give your business a stronger online discoverability base.",
-    includes: [
-      "Technical SEO",
-      "On-page SEO",
-      "Keyword and content planning",
-      "Local SEO foundations",
-    ],
-    process: [
-      "Website and keyword analysis",
-      "Technical optimization",
-      "On-page improvements",
-      "Monitoring and content planning",
-    ],
-    idealFor:
-      "Businesses that want their website to become easier to discover through search engines.",
-  },
-
-  "04": {
-    title: "E-commerce",
-    eyebrow: "E-COMMERCE",
-    description:
-      "We create product-focused e-commerce experiences with clear navigation, organized product presentation and mobile-friendly layouts.",
-    includes: [
-      "Product and category pages",
-      "Responsive shopping interfaces",
-      "Product information sections",
-      "Conversion-focused layouts",
-    ],
-    process: [
-      "Understanding products and customers",
-      "Planning categories and pages",
-      "Building the storefront",
-      "Testing the shopping experience",
-    ],
-    idealFor:
-      "Retailers, small businesses, creators and brands that want to showcase or sell products online.",
-  },
-
-  "05": {
-    title: "AI Solutions",
-    eyebrow: "AI SOLUTIONS",
-    description:
-      "We explore practical AI-powered experiences that can help businesses automate tasks, improve workflows and create smarter digital products.",
-    includes: [
-      "AI-powered features",
-      "Automation concepts",
-      "AI API integration",
-      "Business workflow solutions",
-    ],
-    process: [
-      "Understanding the business problem",
-      "Identifying AI opportunities",
-      "Building the solution",
-      "Testing and improvement",
-    ],
-    idealFor:
-      "Businesses looking to introduce useful AI features or automate repetitive digital workflows.",
-  },
-
-  "06": {
-    title: "Digital Growth",
-    eyebrow: "DIGITAL GROWTH",
-    description:
-      "We connect website experience, content and digital visibility into a practical strategy focused on long-term online growth.",
-    includes: [
-      "Digital growth planning",
-      "Content direction",
-      "Website performance improvements",
-      "Online visibility strategy",
-    ],
-    process: [
-      "Understanding business goals",
-      "Identifying growth opportunities",
-      "Planning digital improvements",
-      "Tracking and refining",
-    ],
-    idealFor:
-      "Businesses that already have a digital presence and want to improve its effectiveness and visibility.",
-  },
-};
 
 const process = [
   {
@@ -512,7 +386,7 @@ function ServicePage({ service }) {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
-  const [faqItems, setFaqItems] = useState(faqs);
+  
   const [faqQueryOpen, setFaqQueryOpen] = useState(false);
   const [faqQuestion, setFaqQuestion] = useState("");
   const [faqName, setFaqName] = useState("");
@@ -592,10 +466,11 @@ function App() {
 
   const handleCtaSubmit = async (event) => {
   event.preventDefault();
-
+  
   try {
+    
     const response = await axios.post(
-      "http://localhost:5000/api/conversations",
+      `${API_BASE_URL}/api/conversations`,
       {
         name: ctaForm.name,
         email: ctaForm.email,
@@ -639,7 +514,7 @@ ${ctaForm.idea}`,
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/conversations",
+      `${API_BASE_URL}/api/conversations`,
       {
         name: faqName || "Not provided",
         email: faqEmail || "Not provided",
@@ -1674,15 +1549,10 @@ ${ctaForm.idea}`,
 
 
               {ctaSubmitted && (
-
-                <small className="cta-form-success">
-
-                  Your query is ready. Your email application should
-                  open with the project details filled in.
-
-                </small>
-
-              )}
+  <small className="cta-form-success">
+    Your project inquiry has been submitted successfully!
+  </small>
+)}
 
             </form>
 
